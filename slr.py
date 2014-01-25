@@ -16,6 +16,7 @@ no_lines=0
 grammar=[]
 updated_grammar=[]
 firstset={}
+followset={}
 
 def read_grammar():
     #Opening grammar file
@@ -87,6 +88,22 @@ def first(nonterminal):
         #print updated_grammar[j][betapos+1]
         first(updated_grammar[j][betapos+1])    
 
+def follow():
+    initialSym=updated_grammar[0][0]
+    print initialSym
+    global followset
+    j=0
+    #print updated_grammar
+    for i in updated_grammar:
+        pos=i.find(initialSym)
+        if pos>=0:
+            if (i[pos+1] != '>') and (i[pos+1] != '`') :
+                print i[pos+1],'$'
+                followset[initialSym]=(i[pos+1],'$')
+        j=j+1
+        #print j
+    #print j 
+
 def removeLeftRec(grammar):
     #print grammar[0][0]
     #print grammar[0][2]
@@ -107,8 +124,9 @@ def main():
     #print gram1
     global terms
     terms=['+','(',')','id','$','e','*']
-    first('E`')
-    print firstset
+    #first('E`')
+    #print firstset
+    follow()
 
 if __name__=='__main__':
     main()
