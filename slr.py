@@ -82,8 +82,7 @@ def first(nonterminal):
         print updated_grammar[j][betapos+1]
         print rhs
         global firstset
-        
-        
+        firstset[nonterminal]=(updated_grammar[j][betapos+1],rhs)
     else:
         #print updated_grammar[j][betapos+1]
         first(updated_grammar[j][betapos+1])    
@@ -109,6 +108,7 @@ def main():
     global terms
     terms=['+','(',')','id','$','e','*']
     first('E`')
+    print firstset
 
 if __name__=='__main__':
     main()
